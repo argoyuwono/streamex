@@ -104,7 +104,7 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title: movieData.title,
       description: movieData.overview || `Detailed information for movie ${movieData.title}`,
-      url: `https://vegamovies-hd.vercel.app/movie/${slug}`,
+      url: `https://vegamovies-watch.netlify.app/movie/${slug}`,
       siteName: 'Vegamovies',
       images: [
         {

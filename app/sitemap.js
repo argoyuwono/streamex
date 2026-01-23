@@ -1,5 +1,5 @@
 // app/sitemap.js - VERSI DIPERBAIKI DAN LENGKAP
-const BASE_URL = 'https://vegamovies-hd.vercel.app';
+const BASE_URL = 'https://vegamovies-watch.netlify.app';
 
 export default async function sitemap() {
   console.log('🎬 Generating dynamic sitemap for Vegamovies...');

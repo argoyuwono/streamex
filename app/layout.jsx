@@ -11,7 +11,7 @@ export const metadata = {
   openGraph: {
     title: 'Vegamovies | Complete Movie & TV Series Database',
     description: 'Your ultimate destination for movies, TV series, actor profiles, and streaming information. Explore genres, yearly archives, and top rankings.',
-    url: 'https://vegamovies-hd.vercel.app',
+    url: 'https://vegamovies-watch.netlify.app',
     siteName: 'Vegamovies',
     images: [
       {
@@ -53,10 +53,10 @@ export default function RootLayout({ children }) {
               "@type": "MovieDatabase",
               "name": "Vegamovies",
               "description": "Complete movie and TV series database with streaming information",
-              "url": "https://vegamovies-hd.vercel.app",
+              "url": "https://vegamovies-watch.netlify.app",
               "logo": "https://live.staticflickr.com/65535/54804572135_3f755a60e7_b.jpg",
               "sameAs": [
-                "https://vegamovies-hd.vercel.app"
+                "https://vegamovies-watch.netlify.app"
               ]
             })
           }}

@@ -14,7 +14,7 @@ export async function generateMetadata({ params }) {
   const genre = genres.find(g => g.name.toLowerCase().replace(/\s/g, '-') === genreName);
   const title = genre?.name || 'Unknown';
 
-  const pageUrl = `https://vegamovies-hd.vercel.app/movie/genre/${genreName}`;
+  const pageUrl = `https://vegamovies-watch.netlify.app/movie/genre/${genreName}`;
   const imageUrl = 'https://live.staticflickr.com/65535/54804572135_3f755a60e7_b.jpg';
 
   return {
