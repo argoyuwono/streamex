@@ -1,7 +1,7 @@
 import './globals.css';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
-import AdsterraLayoutWrapper from '../components/AdsterraLayoutWrapper';
+import AdsterraLayoutWrapper from '../components/layout/AdsterraLayoutWrapper'; // ✅ PATH DIPERBAIKI
 import AdBanner from '../components/ads/AdBanner'; // ✅ Komponen baru untuk banner
 
 export const metadata = {
