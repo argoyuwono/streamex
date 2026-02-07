@@ -14,17 +14,17 @@ export async function generateMetadata({ params }) {
   const genre = genres.find(g => g.name.toLowerCase().replace(/\s/g, '-') === genreName);
   const title = genre?.name || 'Unknown';
 
-  const pageUrl = `https://vegamovies-watch.netlify.app/movie/genre/${genreName}`;
-  const imageUrl = 'https://live.staticflickr.com/65535/54804572135_3f755a60e7_b.jpg';
+  const pageUrl = `https://streamex.netlify.app/movie/genre/${genreName}`;
+  const imageUrl = 'https://live.staticflickr.com/65535/55082911958_709cdb67ef_b.jpg';
 
   return {
-    title: `Vegamovies - ${title} Movies`,
-    description: `Find and watch the best ${title} movies for free on Vegamovies.`,
+    title: `Streamex - ${title} Movies`,
+    description: `Find and watch the best ${title} movies for free on Streamex.`,
     openGraph: {
-      title: `Vegamovies - ${title} Movies`,
-      description: `Find and watch the best ${title} movies for free on Vegamovies.`,
+      title: `Streamex - ${title} Movies`,
+      description: `Find and watch the best ${title} movies for free on Streamex.`,
       url: pageUrl,
-      siteName: 'Vegamovies',
+      siteName: 'Streamex',
       images: [
         {
           url: imageUrl,
@@ -40,8 +40,8 @@ export async function generateMetadata({ params }) {
       card: 'summary_large_image',
       site: '@WatchStream123',
       creator: '@WatchStream123',
-      title: `Vegamovies - ${title} Movies`,
-      description: `Find and watch the best ${title} movies for free on Vegamovies.`,
+      title: `Streamex - ${title} Movies`,
+      description: `Find and watch the best ${title} movies for free on Streamex.`,
       images: [imageUrl],
     },
     other: {

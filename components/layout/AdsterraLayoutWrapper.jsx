@@ -1,102 +1,50 @@
+// components/layout/AdsterraLayoutWrapper.jsx
 "use client";
 
 import { useEffect, useRef } from 'react';
+import { getAIOptimizer } from '../../utils/adsterra';
 
-export default function AdsterraLayoutWrapper({ children }) {
-  const scriptsLoaded = useRef(false);
-  const retryCount = useRef(0);
-  const MAX_RETRIES = 2;
+export default function AdsterraLayoutWrapper({ children, countryCode }) {
+  const initialized = useRef(false);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      let timer;
-
-      // ✅ SKRIPT IKLAN TANPA POPUNDER (Hanya Native Banner & Social Bar)
-      const scripts = [
-        {
-          id: 'adsterra-native-banner',
-          src: '//fundingfashioned.com/ae067c1fe6d2e43f32b30f43ee3516d5/invoke.js',
-          attributes: { 'data-cfasync': 'false' }
-        },
-        {
-          id: 'adsterra-social-bar',
-          src: '//fundingfashioned.com/52/cc/03/52cc03cf4af4c86fe0e87185cb1f75ab.js'
+    if (typeof window !== 'undefined' && !initialized.current) {
+        const optimizer = getAIOptimizer();
+        if (optimizer) {
+            optimizer.setGeo(countryCode);
         }
-        // ❌ POPUNDER DIHAPUS
-      ];
 
-      const loadScripts = () => {
-        if (scriptsLoaded.current) return;
-        
-        scripts.forEach(scriptConfig => {
-          if (document.getElementById(scriptConfig.id)) return;
+        const nativeContainer = document.getElementById('container-da8e9044b2c93a0ebc6ca4297409ef34');
 
-          const script = document.createElement('script');
-          script.id = scriptConfig.id;
-          script.src = scriptConfig.src;
-          script.async = true;
+        const visibleAds = [
+            { id: 'native', src: '//fundingfashioned.com/da8e9044b2c93a0ebc6ca4297409ef34/invoke.js' },
+            { id: 'social', src: '//fundingfashioned.com/d1/be/ef/d1beefa0ce88b9fdc61d9df96ac8a884.js' }
+        ];
 
-          if (scriptConfig.attributes) {
-            Object.entries(scriptConfig.attributes).forEach(([key, value]) => {
-              script.setAttribute(key, value);
-            });
-          }
-
-          script.onerror = () => {
-            console.error(`❌ ${scriptConfig.id} failed to load`);
-            retryCount.current++;
-            if (retryCount.current <= MAX_RETRIES) {
-              console.log(`🔄 Retrying ${scriptConfig.id}... (${retryCount.current}/${MAX_RETRIES})`);
-              setTimeout(loadScripts, 1000 * retryCount.current);
+        visibleAds.forEach(s => {
+            if(document.querySelector(`script[src="${s.src}"]`)) return;
+            const el = document.createElement('script');
+            el.src = s.src;
+            el.async = true;
+            
+            // PERBAIKAN: Masukkan script native ke kontainer footer jika ada
+            if (s.id === 'native' && nativeContainer) {
+                nativeContainer.appendChild(el);
+            } else {
+                document.body.appendChild(el);
             }
-          };
-
-          script.onload = () => {
-            console.log(`✅ ${scriptConfig.id} loaded`);
-          };
-
-          document.body.appendChild(script);
         });
 
-        scriptsLoaded.current = true;
-        console.log('🎉 Adsterra scripts loaded (without popunder)');
-      };
+        setTimeout(() => {
+            if(document.querySelector(`script[src*="7b62b2afc861dc772196dbfef884ab2a"]`)) return;
+            const popunder = document.createElement('script');
+            popunder.src = '//fundingfashioned.com/7b/62/b2/7b62b2afc861dc772196dbfef884ab2a.js'; 
+            document.head.appendChild(popunder);
+        }, 3500);
 
-      // Delay initial load
-      timer = setTimeout(loadScripts, 2000);
-
-      // ✅ USER INTERACTION TRIGGER
-      const handleInteraction = () => {
-        if (!scriptsLoaded.current) {
-          loadScripts();
-        }
-      };
-
-      // Attach listeners dengan once
-      ['click', 'scroll', 'touchstart'].forEach(event => {
-        window.addEventListener(event, handleInteraction, { once: true });
-      });
-
-      return () => {
-        clearTimeout(timer);
-        
-        // Remove listeners
-        ['click', 'scroll', 'touchstart'].forEach(event => {
-          window.removeEventListener(event, handleInteraction);
-        });
-
-        // Cleanup scripts
-        scripts.forEach(scriptConfig => {
-          const script = document.getElementById(scriptConfig.id);
-          if (script?.parentNode) {
-            script.parentNode.removeChild(script);
-          }
-        });
-        
-        scriptsLoaded.current = false;
-      };
+        initialized.current = true;
     }
-  }, []);
+  }, [countryCode]);
 
   return <>{children}</>;
 }

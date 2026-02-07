@@ -1,24 +1,25 @@
+import { headers } from 'next/headers'; 
 import './globals.css';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
-import AdsterraLayoutWrapper from '../components/layout/AdsterraLayoutWrapper'; // ✅ PATH DIPERBAIKI
-import AdBanner from '../components/ads/AdBanner'; // ✅ Komponen baru untuk banner
+import AdsterraLayoutWrapper from '../components/layout/AdsterraLayoutWrapper'; 
+import AdBanner from '../components/ads/AdBanner'; 
 
 export const metadata = {
-  title: 'Vegamovies | Watch Movies, Stream TV Series Free - Complete Movie Database',
-  description: 'Vegamovies is your ultimate movie database with 10,000+ movies, 5,000+ TV series, actor profiles, genre pages, and yearly archives. Discover, stream, and enjoy cinematic excellence with our comprehensive entertainment platform.',
+  title: 'Streamex | Watch Movies, Stream TV Series Free - Complete Movie Database',
+  description: 'Streamex is your ultimate movie database with 10,000+ movies, 5,000+ TV series, actor profiles, genre pages, and yearly archives. Discover, stream, and enjoy cinematic excellence with our comprehensive entertainment platform.',
   keywords: 'movies, tv series, streaming, movie database, actors, genres, rankings, movie archives',
   openGraph: {
-    title: 'Vegamovies | Complete Movie & TV Series Database',
+    title: 'Streamex | Complete Movie & TV Series Database',
     description: 'Your ultimate destination for movies, TV series, actor profiles, and streaming information. Explore genres, yearly archives, and top rankings.',
-    url: 'https://vegamovies-watch.netlify.app',
-    siteName: 'Vegamovies',
+    url: 'https://streamex.netlify.app',
+    siteName: 'Streamex',
     images: [
       {
-        url: 'https://live.staticflickr.com/65535/54804572135_3f755a60e7_b.jpg',
+        url: 'https://live.staticflickr.com/65535/55082911958_709cdb67ef_b.jpg',
         width: 1200,
         height: 630,
-        alt: 'Vegamovies - Complete Movie Database',
+        alt: 'Streamex - Complete Movie Database',
       },
     ],
     locale: 'en_US',
@@ -28,9 +29,9 @@ export const metadata = {
     card: 'summary_large_image',
     site: '@WatchStream123',
     creator: '@WatchStream123',
-    title: 'Vegamovies | Complete Movie & TV Series Database',
-    description: 'Explore 10,000+ movies, 5,000+ TV series, actor profiles, and streaming guides on Vegamovies.',
-    images: ['https://live.staticflickr.com/65535/54804572135_3f755a60e7_b.jpg'],
+    title: 'Streamex | Complete Movie & TV Series Database',
+    description: 'Explore 10,000+ movies, 5,000+ TV series, actor profiles, and streaming guides on Streamex.',
+    images: ['https://live.staticflickr.com/65535/55082911958_709cdb67ef_b.jpg'],
   },
   // Tambahkan tag meta eksplisit untuk Facebook
   other: {
@@ -38,44 +39,29 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  // Unwrapping headers secara async (Standar Next.js 15/16)
+  const headersList = await headers();
+  const countryCode = headersList.get('x-vercel-ip-country') || headersList.get('cf-ipcountry') || 'ID';
+
   return (
     <html lang="en">
-	  <head>
-        {/* Tag verifikasi Google Search Console */}
-        <meta name="google-site-verification" content="6Atx4ZF6e1M-kmUJNE_PL7Y8M-1xPgCndYdUmur_unw" />
-        {/* Schema.org markup untuk Movie Database */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "MovieDatabase",
-              "name": "Vegamovies",
-              "description": "Complete movie and TV series database with streaming information",
-              "url": "https://vegamovies-watch.netlify.app",
-              "logo": "https://live.staticflickr.com/65535/54804572135_3f755a60e7_b.jpg",
-              "sameAs": [
-                "https://vegamovies-watch.netlify.app"
-              ]
-            })
-          }}
-        />
+      <head>
+        <meta name="google-site-verification" content="eTxFXDMvx8hMq6FhZjy7dM4MJScVKVtkRyNOZ__jplA" />
       </head>
       <body>
-        <AdsterraLayoutWrapper>
+        <AdsterraLayoutWrapper countryCode={countryCode}>
           <div className="flex flex-col min-h-screen bg-slate-900">
             <header className="w-full max-w-7xl mx-auto px-4 py-4 sticky top-0 z-50 bg-slate-900 shadow-lg">
               <Navbar />
             </header>
             
-            {/* ✅ Banner 728x90 di bawah navbar */}
             <div className="w-full bg-slate-900 py-2">
               <div className="max-w-7xl mx-auto px-4 flex justify-center">
                 <AdBanner 
-                  adId="728x90_banner_navbar"
-                  scriptKey="9b13e92107a71a1371de50e6ebbb026b"
-                  height={90}
+                  adId="728x90_header"
+                  scriptKey="07e34b2586d02806250e99cdaebfeca9"
+                  height={90} 
                   width={728}
                   className="rounded-lg overflow-hidden shadow-lg"
                 />
@@ -87,8 +73,7 @@ export default function RootLayout({ children }) {
             </main>
             
             <footer className="w-full max-w-7xl mx-auto px-4 py-8">
-              {/* Tempatkan div Native Banner di sini, sebelum Footer */}
-              <div id="container-ae067c1fe6d2e43f32b30f43ee3516d5"></div>
+              <div id="container-da8e9044b2c93a0ebc6ca4297409ef34"></div>
               <Footer />
             </footer>
           </div>
