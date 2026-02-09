@@ -2,7 +2,7 @@
 const BASE_URL = 'https://streamex.netlify.app';
 
 export default async function sitemap() {
-  console.log('🎬 Generating dynamic sitemap for Streamex...');
+  console.log('🎬 Generating dynamic sitemap for StreameX...');
   
   try {
     const [staticUrls, dynamicUrls] = await Promise.all([
