@@ -6,20 +6,20 @@ import AdsterraLayoutWrapper from '../components/layout/AdsterraLayoutWrapper';
 import AdBanner from '../components/ads/AdBanner'; 
 
 export const metadata = {
-  title: 'Streamex | Watch Movies, Stream TV Series Free - Complete Movie Database',
-  description: 'Streamex is your ultimate movie database with 10,000+ movies, 5,000+ TV series, actor profiles, genre pages, and yearly archives. Discover, stream, and enjoy cinematic excellence with our comprehensive entertainment platform.',
-  keywords: 'movies, tv series, streaming, movie database, actors, genres, rankings, movie archives',
+  title: 'Watch Movies Online Free | Stream TV Series HD - StreameX',
+  description: 'Find where to watch movies & TV series online for free or on Netflix, Disney+, Prime Video. StreameX tracks 10,000+ movies, 5,000+ shows, box office results, actor info, and provides HD streaming guides across all genres (action, horror, romance, anime, drakor).',
+  keywords: 'watch movies, stream TV series, movie database, where to watch, streaming guide, Netflix, Disney+, Prime Video, free movies online, HD streaming, actor profiles, box office results',
   openGraph: {
-    title: 'Streamex | Complete Movie & TV Series Database',
-    description: 'Your ultimate destination for movies, TV series, actor profiles, and streaming information. Explore genres, yearly archives, and top rankings.',
-    url: 'https://streamex.netlify.app',
-    siteName: 'Streamex',
+    title: 'Watch Movies Online Free | Stream TV Series HD - StreameX',
+    description: 'Find where to watch movies & TV series online for free or on Netflix, Disney+, Prime Video. Get streaming guides, actor profiles, and genre recommendations.',
+    url: 'https://StreameXmovie.netlify.app',
+    siteName: 'StreameX',
     images: [
       {
         url: 'https://live.staticflickr.com/65535/55082911958_709cdb67ef_b.jpg',
         width: 1200,
         height: 630,
-        alt: 'Streamex - Complete Movie Database',
+        alt: 'StreameX - Watch Movies Online Free and Stream TV Series',
       },
     ],
     locale: 'en_US',
@@ -29,8 +29,8 @@ export const metadata = {
     card: 'summary_large_image',
     site: '@WatchStream123',
     creator: '@WatchStream123',
-    title: 'Streamex | Complete Movie & TV Series Database',
-    description: 'Explore 10,000+ movies, 5,000+ TV series, actor profiles, and streaming guides on Streamex.',
+    title: 'Watch Movies Online Free | Stream TV Series HD - StreameX',
+    description: 'Find where to watch movies & TV series online for free or on Netflix, Disney+, Prime Video. Streaming guides and recommendations.',
     images: ['https://live.staticflickr.com/65535/55082911958_709cdb67ef_b.jpg'],
   },
   // Tambahkan tag meta eksplisit untuk Facebook
@@ -48,6 +48,45 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <head>
         <meta name="google-site-verification" content="eTxFXDMvx8hMq6FhZjy7dM4MJScVKVtkRyNOZ__jplA" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="canonical" href="https://StreameXmovie.netlify.app" />
+        
+        {/* Structured Data untuk SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "StreameX",
+              "url": "https://StreameXmovie.netlify.app",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://StreameXmovie.netlify.app/search?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+              },
+              "description": "Find where to watch movies & TV series online for free or on Netflix, Disney+, Prime Video.",
+              "keywords": "watch movies, stream TV series, movie database, where to watch, streaming guide"
+            })
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "StreameX",
+              "url": "https://StreameXmovie.netlify.app",
+              "logo": "https://live.staticflickr.com/65535/55082911958_709cdb67ef_b.jpg",
+              "description": "Streaming guide and movie database",
+              "sameAs": [
+                "https://twitter.com/WatchStream123",
+                "https://facebook.com/StreameX"
+              ]
+            })
+          }}
+        />
       </head>
       <body>
         <AdsterraLayoutWrapper countryCode={countryCode}>
